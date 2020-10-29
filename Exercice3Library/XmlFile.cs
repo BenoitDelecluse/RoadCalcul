@@ -35,10 +35,7 @@ namespace Exercice3Library
         {
             var cryptedDoc = ReadXmlFile(path);
             var contentnode = cryptedDoc.DocumentElement;
-            //XmlNodeList aNodes = cryptedDoc.SelectNodes("/Content");
-
             handleNode(contentnode, Algo);
-            //contentnode.InnerXml = Algo.Uncrypte(contentnode.InnerXml);
             return cryptedDoc;
         }
 
