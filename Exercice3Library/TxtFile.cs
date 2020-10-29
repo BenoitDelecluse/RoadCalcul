@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Exercice3Library.Algorithm;
+using System;
 
 namespace Exercice3Library
 {
@@ -12,6 +13,12 @@ namespace Exercice3Library
             }
             throw new Exception("File does not exist");
 
+        }
+
+        public string ReadEncryptedTextFile(string path , ITextCrypted Algo)
+        {
+            var cryptedValue = ReadTxtFile(path);
+            return Algo.Uncrypte(cryptedValue); 
         }
     }
 }
