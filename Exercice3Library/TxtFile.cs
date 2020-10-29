@@ -15,7 +15,7 @@ namespace Exercice3Library
 
         }
 
-        public string ReadEncryptedTextFile(string path , ITextCrypted Algo)
+        public string ReadCryptedTextFile(string path , ITextCrypted Algo)
         {
             var cryptedValue = ReadTxtFile(path);
             return Algo.Uncrypte(cryptedValue); 
