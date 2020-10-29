@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoadCalculModel", "RoadCalc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadCalculRepository", "ReadCalculRepository\ReadCalculRepository.csproj", "{1660A4D4-C691-45F3-BFB7-6B89B4E936BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadCalculServices", "RoadCalculServices\RoadCalculServices.csproj", "{B193C589-BBD2-4B41-BE16-3591D5F815BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoadCalculServices", "RoadCalculServices\RoadCalculServices.csproj", "{B193C589-BBD2-4B41-BE16-3591D5F815BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercice2App", "Exercice2App\Exercice2App.csproj", "{12E17635-37DD-42BE-9CAF-AF5C1E171735}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B193C589-BBD2-4B41-BE16-3591D5F815BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B193C589-BBD2-4B41-BE16-3591D5F815BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B193C589-BBD2-4B41-BE16-3591D5F815BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E17635-37DD-42BE-9CAF-AF5C1E171735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E17635-37DD-42BE-9CAF-AF5C1E171735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E17635-37DD-42BE-9CAF-AF5C1E171735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E17635-37DD-42BE-9CAF-AF5C1E171735}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
