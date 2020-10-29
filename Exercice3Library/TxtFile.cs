@@ -8,7 +8,7 @@ namespace Exercice3Library
         {
             if (System.IO.File.Exists(path))
             {
-                return System.IO.File.ReadAllText(@"C:\Users\Public\TestFolder\WriteText.txt");
+                return System.IO.File.ReadAllText(path);
             }
             throw new Exception("File does not exist");
 
