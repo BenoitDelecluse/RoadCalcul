@@ -11,6 +11,12 @@ namespace Exercice2
         public override void MyCustomeMethod()
         {
             Console.WriteLine("MyCustomeMethod B");
+            SomeAdditionalMethodOnB();
+        }
+
+        public void SomeAdditionalMethodOnB()
+        {
+            Console.WriteLine("SomeAdditionalMethodOn B");
         }
     }
 }
