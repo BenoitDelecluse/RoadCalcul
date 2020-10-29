@@ -1,4 +1,5 @@
-﻿using Exercice3Library.Security;
+﻿using Exercice3Library.Algorithm;
+using Exercice3Library.Security;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,6 +29,32 @@ namespace Exercice3Library
                 throw new Exception("File does not exist path :" + path);
             }
             throw new Exception("Access to the file : " + path + "  is disabled due to role restriction.");
+        }
+
+        public XmlDocument ReadCryptedXmlFile(string path, ITextCrypted Algo)
+        {
+            var cryptedDoc = ReadXmlFile(path);
+            var contentnode = cryptedDoc.DocumentElement;
+            //XmlNodeList aNodes = cryptedDoc.SelectNodes("/Content");
+
+            handleNode(contentnode, Algo);
+            //contentnode.InnerXml = Algo.Uncrypte(contentnode.InnerXml);
+            return cryptedDoc;
+        }
+
+        private static void handleNode(XmlNode node, ITextCrypted Algo)
+        {
+            if (node.HasChildNodes)
+            {
+                foreach (XmlNode child in node.ChildNodes)
+                {
+                    handleNode(child, Algo);
+                }
+            }
+            else
+            {
+                node.InnerText = Algo.Uncrypte(node.InnerText);
+            } 
         }
     }
 }
