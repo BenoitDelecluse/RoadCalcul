@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content>
+	<Equipment>
+		<DataCollections>
+			<GroupAIDs>
+				<AID id="100">
+					<Variable id="200">dlroW olleH</Variable>
+					<Variable id="201">muigleB olleH</Variable>
+				</AID>
+				<AID id="">
+					<Variable id="205">dnalaeZ weN olleH</Variable>
+				</AID>
+				<AID id="102">aissuR olleH</AID>
+			</GroupAIDs>
+			<GroupBIDs>
+				<BID id="2000">
+					<AID id="100">sdnalsI llahsraM olleH</AID>
+				</BID>
+				<BID id="2001">
+					<AID id="101">ainevolS olleH</AID>
+					<AID id="102">dlroW olleH</AID>
+				</BID>
+			</GroupBIDs>
+			<GroupCIDs>
+				<BID id="8">ognoC eht fo cilbupeR citarcomeD olleH</BID>
+				<BID id="9">dnalecI olleH</BID>
+				<BID id="10">dlroW olleH</BID>
+			</GroupCIDs>
+		</DataCollections>
+	</Equipment>
+</Content>

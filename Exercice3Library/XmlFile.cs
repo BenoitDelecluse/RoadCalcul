@@ -17,18 +17,20 @@ namespace Exercice3Library
         }
         public XmlDocument ReadXmlFile(string path)
         {
-            if (this.Role.CheckRolesForFile(path))
+            if (System.IO.File.Exists(path))
             {
-                if (System.IO.File.Exists(path))
+                if (this.Role.CheckRolesForFile(path))
                 {
+
                     XmlDocument xmldoc = new XmlDocument();
                     FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
                     xmldoc.Load(fs);
                     return xmldoc;
+
                 }
-                throw new Exception("File does not exist path :" + path);
+                throw new Exception("Access to the file : " + path + "  is disabled due to role restriction.");
             }
-            throw new Exception("Access to the file : " + path + "  is disabled due to role restriction.");
+            throw new Exception("File does not exist path :" + path);
         }
 
         public XmlDocument ReadCryptedXmlFile(string path, ITextCrypted Algo)
@@ -51,7 +53,7 @@ namespace Exercice3Library
             else
             {
                 node.InnerText = Algo.Uncrypte(node.InnerText);
-            } 
+            }
         }
     }
 }

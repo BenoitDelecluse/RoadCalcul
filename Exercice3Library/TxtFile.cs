@@ -12,15 +12,16 @@ namespace Exercice3Library
         }
         public string ReadTxtFile(string path)
         {
-            if (this.Role.CheckRolesForFile(path))
+            if (System.IO.File.Exists(path))
             {
-                if (System.IO.File.Exists(path))
+                if (this.Role.CheckRolesForFile(path))
                 {
                     return System.IO.File.ReadAllText(path);
+
                 }
-                throw new Exception("File does not exist");
+                throw new Exception("Access to the file : " + path + "  is disabled due to role restriction.");
             }
-            throw new Exception("Access to the file : " + path + "  is disabled due to role restriction.");
+            throw new Exception("File does not exist");
         }
 
         public string ReadCryptedTextFile(string path, ITextCrypted Algo)

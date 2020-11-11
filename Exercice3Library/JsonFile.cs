@@ -14,13 +14,14 @@ namespace Exercice3Library
         {
             Role = role;
         }
-     
+
         public string ReadJsonFile(string path)
         {
-            if (this.Role.CheckRolesForFile(path))
+            if (System.IO.File.Exists(path))
             {
-                if (System.IO.File.Exists(path))
+                if (this.Role.CheckRolesForFile(path))
                 {
+
                     var st = System.IO.File.ReadAllText(path);
                     try
                     {
@@ -32,17 +33,18 @@ namespace Exercice3Library
                     }
                     return st;
                 }
-                throw new Exception("File does not exist");
+                throw new Exception("Access to the file : " + path + "  is disabled due to role restriction.");
             }
-            throw new Exception("Access to the file : " + path + "  is disabled due to role restriction.");
+            throw new Exception("File does not exist");
         }
 
         public String ReadCryptedJsonlFile(string path, ITextCrypted Algo)
         {
-            if (this.Role.CheckRolesForFile(path))
+            if (System.IO.File.Exists(path))
             {
-                if (System.IO.File.Exists(path))
+                if (this.Role.CheckRolesForFile(path))
                 {
+
                     var cryptedValue = System.IO.File.ReadAllText(path);
                     var uncrypted = Algo.Uncrypte(cryptedValue);
                     try
@@ -55,9 +57,9 @@ namespace Exercice3Library
                     }
                     return uncrypted;
                 }
-                throw new Exception("File does not exist");
+                throw new Exception("Access to the file : " + path + "  is disabled due to role restriction.");
             }
-            throw new Exception("Access to the file : " + path + "  is disabled due to role restriction."); 
+            throw new Exception("File does not exist");
         }
     }
 }
