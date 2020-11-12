@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Calcul";
+}
+<h1>@ViewData["Title"]</h1>
+
+@model RoadCalcul.Models.CalculModel
+<div>
+    <div style="width:300px; float:left">
+        <h2>Departure</h2>
+        <h3>Name :</h3>
+        @Html.DisplayFor(m => m.Departure.Name)
+        <h3>Type :</h3>
+        @Html.DisplayFor(m => m.Departure.EntityType)
+        <h3>Latitude :</h3>
+        @Html.DisplayFor(m => m.Departure.Point.Coordinates[0])
+        <h3>Longitude :</h3>
+        @Html.DisplayFor(m => m.Departure.Point.Coordinates[1])
+    </div>
+    <div style="width:300px; float:left">
+        <h2>Destination</h2>
+        <h3>Name :</h3>
+        @Html.DisplayFor(m => m.Destination.Name)
+        <h3>Type :</h3>
+        @Html.DisplayFor(m => m.Destination.EntityType)
+        <h3>Latitude :</h3>
+        @Html.DisplayFor(m => m.Destination.Point.Coordinates[0])
+        <h3>Longitude :</h3>
+        @Html.DisplayFor(m => m.Destination.Point.Coordinates[1])
+    </div>
+
+    <div style="width:300px; float:left">
+        <h2>Resultat</h2>
+        <h3>Distance /km :</h3>
+        @Html.DisplayFor(m => m.Distances[0].Results[0].TravelDistance)
+        <h3>Duration /min :</h3>
+        @Html.DisplayFor(m => m.Distances[0].Results[0].TravelDuration)
+    </div>
+       
+    </div>

@@ -21,7 +21,7 @@ namespace RoadCalculServices
 
         public async Task<bool> Add(CalculDistanceHistorique value)
         {
-            if (IsValidCalCulDistanctHistorique(value))
+            if (IsValidCalCulDistanctHistorique(value,true))
             {
                 return await RepoCalculDistanceHistorique.Add(value);
             }
@@ -35,32 +35,35 @@ namespace RoadCalculServices
 
         public async Task<bool> Update(CalculDistanceHistorique value)
         {
-            if (IsValidCalCulDistanctHistorique(value))
+            if (IsValidCalCulDistanctHistorique(value,false))
             {
                 return await RepoCalculDistanceHistorique.Update(value);
             }
             return false;
         }
 
-        private bool IsValidCalCulDistanctHistorique(CalculDistanceHistorique value)
+        private bool IsValidCalCulDistanctHistorique(CalculDistanceHistorique value, bool isadd)
         {
-            if (value.ID < 1)
+            if (!isadd)
+            {
+                if (value.ID < 1)
+                {
+                    return false;
+                }
+            }
+            if (value.OriginLat == 0)
             {
                 return false;
             }
-            if (value.OriginLat <= 0)
+            if (value.DestinationLong == 0)
             {
                 return false;
             }
-            if (value.DestinationLong <= 0)
+            if (value.OriginLong == 0)
             {
                 return false;
             }
-            if (value.OriginLong <= 0)
-            {
-                return false;
-            }
-            if (value.DestinationLat <= 0)
+            if (value.DestinationLat == 0)
             {
                 return false;
             }

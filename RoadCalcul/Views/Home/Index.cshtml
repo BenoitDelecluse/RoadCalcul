@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    @model RoadCalcul.Models.IndexModel
+
+
+
+    @using (Html.BeginForm("IndexAction", "Home", FormMethod.Post))
+    {
+        //@Html.HiddenFor(m => m.SelectDeparture)
+        //@Html.HiddenFor(m => m.SelectDestination)
+        <div>
+            <p>Departure search</p>
+            @Html.TextBoxFor(model => model.Departure.Querry)
+            @Html.ValidationMessageFor(model => model.Departure.Querry)
+            <button name="IndexButon" type="submit" value="SearchDeparture">Search</button>
+        </div>
+        <div>
+            <p>Departure Select</p>
+            @Html.DropDownListFor(model => model.SelectDeparture, new SelectList(Model.DepartureResults, "Name", "Name"))
+        </div>
+
+        <div>
+            <p>Destination search</p>
+            @Html.TextBoxFor(model => model.Destination.Querry)
+            @Html.ValidationMessageFor(model => model.Destination.Querry)
+            <button name="IndexButon" type="submit" value="SearchDestination">Search</button>
+        </div>
+        <div>
+            <p>Destination Select</p>
+            @Html.DropDownListFor(model => model.SelectDestination, new SelectList(Model.DestinationResults, "Name", "Name"))
+
+
+        </div>
+
+        <div>
+            <button name="IndexButon" type="submit" value="Calcul">Calcul</button>
+        </div>
+    }
+   
+</div>

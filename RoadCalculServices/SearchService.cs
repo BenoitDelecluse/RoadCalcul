@@ -20,7 +20,7 @@ namespace RoadCalculServices
         }
         public async Task<bool> Add(SearchHistorique value)
         {
-            if (IsSearchHistorique(value))
+            if (IsSearchHistorique(value,true))
             {
                 return await RepoSearchHistorique.Add(value);
             }
@@ -34,24 +34,33 @@ namespace RoadCalculServices
 
         public async Task<bool> Update(SearchHistorique value)
         {
-            if (IsSearchHistorique(value))
+            if (IsSearchHistorique(value,false))
             {
                 return await RepoSearchHistorique.Update(value);
             }
             return false;
         }
 
-        private bool IsSearchHistorique(SearchHistorique value)
+        private bool IsSearchHistorique(SearchHistorique value,bool isadd)
         {
-            if (value.ID < 1)
+            if (!isadd)
             {
-                return false;
+                if (value.ID < 1)
+                {
+                    return false;
+                }
             }
+           
             if (string.IsNullOrEmpty(value.Querry))
             {
                 return false;
             }
-           
+
+            if (value.Time == null)
+            {
+                return false;
+            }
+
             return true;
         }
     }
