@@ -34,6 +34,12 @@
         @Html.DisplayFor(m => m.Distances[0].Results[0].TravelDistance)
         <h3>Duration /min :</h3>
         @Html.DisplayFor(m => m.Distances[0].Results[0].TravelDuration)
+    <h3>Car cosumption</h3>
+        l/100Km :
+        @Html.DisplayFor(m => m.CarConsumption)
+    <h3>Distance cosumption</h3>
+        l/@Html.DisplayFor(m => m.Distances[0].Results[0].TravelDistance) km :
+        @Html.DisplayFor(m => m.DistanceConsumption)
     </div>
        
     </div>

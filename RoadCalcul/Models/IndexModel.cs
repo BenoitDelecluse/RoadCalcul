@@ -16,6 +16,7 @@ namespace RoadCalcul.Models
             Departure = new ParkingSearch();
             Destination = new ParkingSearch();
         }
+        public double CarConsumption { get; set; }
         public ParkingSearch Departure { get; set; }
 
         List<Location> _DepartureResults;

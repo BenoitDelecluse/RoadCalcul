@@ -33,6 +33,7 @@ namespace ReadCalculRepository
                 entity.Property(e => e.DestinationType).HasColumnName("DestinationType");
                 entity.Property(e => e.OriginName).HasColumnName("OriginName");
                 entity.Property(e => e.OriginType).HasColumnName("OriginType");
+                entity.Property(e => e.CarConsumption).HasColumnName("CarCosumption");
             });
 
             modelBuilder.Entity<RoadCalculModel.DataBase.SearchHistorique>(entity =>

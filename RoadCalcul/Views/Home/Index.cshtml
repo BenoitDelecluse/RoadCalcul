@@ -13,6 +13,12 @@
         //@Html.HiddenFor(m => m.SelectDeparture)
         //@Html.HiddenFor(m => m.SelectDestination)
         <div>
+            <p>Car Consumption</p>
+            @Html.TextBoxFor(model => model.CarConsumption)
+            @Html.ValidationMessageFor(model => model.CarConsumption)
+            l/100 KM
+        </div>
+        <div>
             <p>Departure search</p>
             @Html.TextBoxFor(model => model.Departure.Querry)
             @Html.ValidationMessageFor(model => model.Departure.Querry)
@@ -40,5 +46,5 @@
             <button name="IndexButon" type="submit" value="Calcul">Calcul</button>
         </div>
     }
-   
+
 </div>

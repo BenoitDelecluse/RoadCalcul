@@ -8,6 +8,7 @@ namespace RoadCalculModel.DataBase
     {
         public int ID { get; set; }
         public DateTime Time { get; set; }
+        public double CarConsumption { get; set; }
         public double OriginLat { get; set; }
         public double OriginLong { get; set; }
         public double DestinationLat { get; set; }
