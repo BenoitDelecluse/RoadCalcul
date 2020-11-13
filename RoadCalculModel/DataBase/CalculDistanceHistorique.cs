@@ -12,5 +12,9 @@ namespace RoadCalculModel.DataBase
         public double OriginLong { get; set; }
         public double DestinationLat { get; set; }
         public double DestinationLong { get; set; }
+        public string OriginName { get; set; }
+        public string DestinationName { get; set; }
+        public string OriginType { get; set; }
+        public string DestinationType { get; set; }
     }
 }

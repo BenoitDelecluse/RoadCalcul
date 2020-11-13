@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Report";
+}
+<h1>@ViewData["Title"]</h1>
+@model RoadCalcul.Models.ReportModel
+    <p>this page display all the Calcul querry executed</p>
+
+
+    <table width="100%">
+        <tr>
+            <td>
+                Time
+            </td>
+            <td>
+                Destination
+            </td>
+            <td>
+                Type
+            </td>
+            <td>
+                Longitude
+            </td>
+            <td>
+                Latitude
+            </td>
+            <td>
+                Departure
+            </td>
+            <td>
+                Type
+            </td>
+            <td>
+                Longitude
+            </td>
+            <td>
+                Latitude
+            </td>
+        </tr>
+        @foreach (var item in Model.CalculDistanceHistoriques)
+        {
+
+    <tr>
+        <td>
+            @Html.DisplayFor(m => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.DestinationName)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.DestinationType)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.DestinationLong)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.DestinationLat)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.OriginName)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.OriginType)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.OriginLong)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.OriginLat)
+        </td>
+        <td>
+            @using (Html.BeginForm("CalculCalculAction", "Home", FormMethod.Post))
+            {
+                <button name="ReportButon" type="submit" value="@item.ID">Calcul</button>
+            }
+        </td>
+        <td>
+            @using (Html.BeginForm("EditCalculAction", "Home", FormMethod.Post))
+            {
+                <button name="ReportButon" type="submit" value="@item.ID">Edit</button>
+            }
+        </td>
+    </tr>
+        }
+    </table>
+
+

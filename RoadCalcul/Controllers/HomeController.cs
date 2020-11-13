@@ -43,6 +43,14 @@ namespace RoadCalcul.Controllers
             return View("Index", model);
         }
 
+        public IActionResult IndexWithBothParams(string Depquery, string Desquerry)
+        {
+            var model = new IndexModel();
+            model.Departure.Querry = Depquery;
+            model.Destination.Querry = Desquerry;
+            return View("Index", model);
+        }
+
         [HttpPost]
         public ActionResult IndexAction(IndexModel model, string IndexButon)
         {
@@ -147,13 +155,15 @@ namespace RoadCalcul.Controllers
             return View("Calcul", model);
         }
 
-        public IActionResult CalculWithParams(double DestLat, double DestLong, double DepLat, double DepLong)
+        public IActionResult CalculWithParams(string DestName, string DesType, double DestLat, double DestLong, string DepName, string DepType, double DepLat, double DepLong)
         {
             double[] DestCoordonates = { DestLat, DestLong };
             double[] DepCoordonates = { DepLat, DepLong };
             var model = new CalculModel();
             model.Departure = new Location
             {
+                Name = DepName,
+                EntityType = DepType,
                 Point = new Point
                 {
                     Coordinates = DestCoordonates
@@ -161,6 +171,8 @@ namespace RoadCalcul.Controllers
             };
             model.Destination = new Location
             {
+                Name = DestName,
+                EntityType = DesType,
                 Point = new Point
                 {
                     Coordinates = DepCoordonates
@@ -189,8 +201,12 @@ namespace RoadCalcul.Controllers
                 var result = BingService.DistanceMatrixAsync(criteria);
                 RouteService.Add(new RoadCalculModel.DataBase.CalculDistanceHistorique
                 {
+                    DestinationName = Destination.Name,
+                    DestinationType = Destination.EntityType,
                     DestinationLat = criteria.Destination.Latitude,
                     DestinationLong = criteria.Destination.Longiture,
+                    OriginName = Departure.Name,
+                    OriginType = Departure.EntityType,
                     OriginLat = criteria.origin.Latitude,
                     OriginLong = criteria.origin.Longiture,
                     Time = DateTime.Now
@@ -208,14 +224,28 @@ namespace RoadCalcul.Controllers
         {
             var model = new ReportModel();
             model.SearchHistoriques = SearchService.GetAll().Result;
-            model.CalculDistanceHistoriques = RouteService.GetAll().Result;
+            //model.CalculDistanceHistoriques = RouteService.GetAll().Result;
             var SearchHisto = JsonSerializer.Serialize(model.SearchHistoriques);
-            var DistanceHisto = JsonSerializer.Serialize(model.CalculDistanceHistoriques);
+            //var DistanceHisto = JsonSerializer.Serialize(model.CalculDistanceHistoriques);
             TempData["HistoriquesSearch"] = SearchHisto;
-            TempData["HistoriquesDistance"] = DistanceHisto;
+            //TempData["HistoriquesDistance"] = DistanceHisto;
             TempData.Keep("HistoriquesSearch");
-            TempData.Keep("HistoriquesDistance");
+            //TempData.Keep("HistoriquesDistance");
             return View("Report", model);
+        }
+
+        public IActionResult ReportCalcul()
+        {
+            var model = new ReportModel();
+            //model.SearchHistoriques = SearchService.GetAll().Result;
+            model.CalculDistanceHistoriques = RouteService.GetAll().Result;
+            //var SearchHisto = JsonSerializer.Serialize(model.SearchHistoriques);
+            var DistanceHisto = JsonSerializer.Serialize(model.CalculDistanceHistoriques);
+            //TempData["HistoriquesSearch"] = SearchHisto;
+            TempData["HistoriquesDistance"] = DistanceHisto;
+            //TempData.Keep("HistoriquesSearch");
+            TempData.Keep("HistoriquesDistance");
+            return View("ReportCalcul", model);
         }
 
         [HttpPost]
@@ -228,7 +258,7 @@ namespace RoadCalcul.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditCalculAction(ReportModel model, string ReportButon)
+        public ActionResult CalculCalculAction(ReportModel model, string ReportButon)
         {
             string JsonDistanceHisto = TempData["HistoriquesDistance"]?.ToString();
             var DistanceHisto = JsonSerializer.Deserialize<List<RoadCalculModel.DataBase.CalculDistanceHistorique>>(JsonDistanceHisto);
@@ -236,10 +266,28 @@ namespace RoadCalcul.Controllers
 
             return RedirectToAction("CalculWithParams", new
             {
+                DestName = Distance.DestinationName,
+                DesType = Distance.DestinationType,
                 DestLat = Distance.DestinationLat,
                 DestLong = Distance.DestinationLong,
+                DepName = Distance.OriginName,
+                DepType = Distance.OriginType,
                 DepLat = Distance.OriginLat,
                 DepLong = Distance.OriginLong
+            });
+        }
+
+        [HttpPost]
+        public ActionResult EditCalculAction(ReportModel model, string ReportButon)
+        {
+            string JsonDistanceHisto = TempData["HistoriquesDistance"]?.ToString();
+            var DistanceHisto = JsonSerializer.Deserialize<List<RoadCalculModel.DataBase.CalculDistanceHistorique>>(JsonDistanceHisto);
+            var Distance = DistanceHisto.Where(sh => sh.ID.ToString() == ReportButon).FirstOrDefault();
+
+            return RedirectToAction("IndexWithBothParams", new
+            {
+                Desquerry = Distance.DestinationName,
+                Depquery = Distance.OriginName,
             });
         }
     }

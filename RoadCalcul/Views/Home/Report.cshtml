@@ -3,7 +3,7 @@
 }
 <h1>@ViewData["Title"]</h1>
 @model RoadCalcul.Models.ReportModel
-<p>Use this page to detail your site's report.</p>
+<p>this page display all the search querry executed</p>
 
 @using (Html.BeginForm("EditSearchAction", "Home", FormMethod.Post))
 {
@@ -29,53 +29,6 @@
                 <td>
                     @*<a asp-controller="Home" asp-action="EditSearch" asp-route-id="@item.ID">Edit</a>*@
                     <button name="ReportButon" type="submit" value="@item.ID">Edit</button>
-                </td>
-            </tr>
-        }
-    </table>
-}
-
-@using (Html.BeginForm("EditCalculAction", "Home", FormMethod.Post))
-{
-    <table width="100%">
-        <tr>
-            <td>
-                Time
-            </td>
-            <td>
-                DestinationLong
-            </td>
-            <td>
-                DestinationLat
-            </td>
-            <td>
-                OriginLong
-            </td>
-            <td>
-                OriginLat
-            </td>
-        </tr>
-        @foreach (var item in Model.CalculDistanceHistoriques)
-        {
-
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => item.Time)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.DestinationLong)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.DestinationLat)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.OriginLong)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.OriginLat)
-                </td>
-                <td>
-                    <button name="ReportButon" type="submit" value="@item.ID">Calcul</button>
                 </td>
             </tr>
         }

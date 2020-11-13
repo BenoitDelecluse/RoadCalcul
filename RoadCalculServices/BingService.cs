@@ -15,6 +15,8 @@ namespace RoadCalculServices
             var request = new DistanceMatrixRequest()
             {
                 BingMapsKey = BingKey,
+                DistanceUnits = DistanceUnitType.Kilometers,
+                TimeUnits = TimeUnitType.Minute,
                 Origins = new List<SimpleWaypoint>
                     {
                         new SimpleWaypoint(new Coordinate(criteira.origin.Latitude, criteira.origin.Longiture))

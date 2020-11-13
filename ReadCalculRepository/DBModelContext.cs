@@ -29,6 +29,10 @@ namespace ReadCalculRepository
                 entity.Property(e => e.OriginLong).HasColumnName("OriginLong");
                 entity.Property(e => e.DestinationLat).HasColumnName("DestinationLat");
                 entity.Property(e => e.DestinationLong).HasColumnName("DestinationLong");
+                entity.Property(e => e.DestinationName).HasColumnName("DestinationName");
+                entity.Property(e => e.DestinationType).HasColumnName("DestinationType");
+                entity.Property(e => e.OriginName).HasColumnName("OriginName");
+                entity.Property(e => e.OriginType).HasColumnName("OriginType");
             });
 
             modelBuilder.Entity<RoadCalculModel.DataBase.SearchHistorique>(entity =>
