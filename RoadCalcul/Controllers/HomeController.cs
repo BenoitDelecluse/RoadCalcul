@@ -263,6 +263,7 @@ namespace RoadCalcul.Controllers
             var indexmodel = new IndexModel();
             indexmodel.Departure.Querry = Distance.OriginName;
             indexmodel.Destination.Querry = Distance.DestinationName;
+            indexmodel.CarConsumption = Distance.CarConsumption;
             return View("Index", indexmodel);
         }
     }
