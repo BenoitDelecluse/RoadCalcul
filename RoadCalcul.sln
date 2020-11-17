@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadCalculTestService", "RoadCalculTestService\RoadCalculTestService.csproj", "{5B390721-ED1F-43CA-BCEC-F54514676707}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercice3Test", "Exercice3Test\Exercice3Test.csproj", "{EB4A3228-193D-459D-80B3-CC2587679352}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{5B390721-ED1F-43CA-BCEC-F54514676707}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B390721-ED1F-43CA-BCEC-F54514676707}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B390721-ED1F-43CA-BCEC-F54514676707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB4A3228-193D-459D-80B3-CC2587679352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB4A3228-193D-459D-80B3-CC2587679352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB4A3228-193D-459D-80B3-CC2587679352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB4A3228-193D-459D-80B3-CC2587679352}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
