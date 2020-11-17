@@ -17,7 +17,7 @@ namespace ReadCalculRepository
             this.ServiceProvider = serviceProvider;
         }
 
-        public Task<List<CalculDistanceHistorique>> Get(int id)
+        public Task<CalculDistanceHistorique> Get(int id)
         {
             throw new NotImplementedException();
         }

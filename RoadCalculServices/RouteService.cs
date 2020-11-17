@@ -42,6 +42,13 @@ namespace RoadCalculServices
             return false;
         }
 
+        public double GetCosumption(double carcosumption, double distance)
+        {
+            var cosumperKM = carcosumption / 100;
+            var FullCosum = cosumperKM * distance;
+            return FullCosum;
+        }
+
         private bool IsValidCalCulDistanctHistorique(CalculDistanceHistorique value, bool isadd)
         {
             if (!isadd)
@@ -50,6 +57,10 @@ namespace RoadCalculServices
                 {
                     return false;
                 }
+            }
+            if (value.CarConsumption <= 0)
+            {
+                return false;
             }
             if (value.OriginLat == 0)
             {

@@ -72,7 +72,7 @@ namespace RoadCalcul.Controllers
                         if (calculmodel != null)
                         {
                             calculmodel.Distances = GetDistances(calculmodel.Departure, calculmodel.Destination, calculmodel.CarConsumption);
-                            calculmodel.DistanceConsumption = GetCosumption(calculmodel.Distances[0].Results[0].TravelDistance, model.CarConsumption);
+                            calculmodel.DistanceConsumption = RouteService.GetCosumption(calculmodel.Distances[0].Results[0].TravelDistance, model.CarConsumption);
                             return View("Calcul", calculmodel);
                         }
                         break;
@@ -139,7 +139,7 @@ namespace RoadCalcul.Controllers
         public IActionResult Calcul(CalculModel model)
         {
             model.Distances = GetDistances(model.Departure, model.Destination, model.CarConsumption);
-            model.DistanceConsumption = GetCosumption(model.Distances[0].Results[0].TravelDistance, model.CarConsumption);
+            model.DistanceConsumption = RouteService.GetCosumption(model.Distances[0].Results[0].TravelDistance, model.CarConsumption);
             return View("Calcul", model);
         }
 
@@ -179,13 +179,6 @@ namespace RoadCalcul.Controllers
             {
                 return new List<DistanceMatrix>();
             }
-        }
-
-        public double GetCosumption(double carcosumption, double distance)
-        {
-            var cosumperKM = carcosumption / 100;
-            var FullCosum = cosumperKM * distance;
-            return FullCosum;
         }
 
         public IActionResult Report()
@@ -249,7 +242,7 @@ namespace RoadCalcul.Controllers
             };
             modelcalcul.CarConsumption = Distance.CarConsumption;
             modelcalcul.Distances = GetDistances(modelcalcul.Departure, modelcalcul.Destination, Distance.CarConsumption);
-            modelcalcul.DistanceConsumption = GetCosumption(modelcalcul.Distances[0].Results[0].TravelDistance, modelcalcul.CarConsumption);
+            modelcalcul.DistanceConsumption = RouteService.GetCosumption(modelcalcul.Distances[0].Results[0].TravelDistance, modelcalcul.CarConsumption);
             return View("Calcul", modelcalcul);
         }
 
