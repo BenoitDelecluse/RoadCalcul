@@ -3,6 +3,7 @@ using Exercice3Library.Algorithm;
 using Exercice3Library.Security;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Exercice3App
 {
@@ -81,7 +82,10 @@ namespace Exercice3App
             Console.WriteLine("press <Enter> to restart another key to exit");
             if (Console.ReadKey().Key == ConsoleKey.Enter)
             {
-                Process();
+                //Process();
+                //var fileName = Assembly.GetExecutingAssembly().Location;
+                //System.Diagnostics.Process.Start(fileName);
+                System.Diagnostics.Process.Start(System.AppDomain.CurrentDomain.FriendlyName);
             }
             else
             {
