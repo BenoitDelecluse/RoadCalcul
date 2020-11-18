@@ -8,18 +8,18 @@ namespace RoadCalculTestService
     [TestFixture]
     public class UnitTestBingService
     {
-        private IBingService BingService;
+        private IBingService Service;
         [SetUp]
         public void Setup()
         {
-            BingService = new BingService();
+            Service = new BingService();
         }
 
         [Test]
         public async System.Threading.Tasks.Task GetLocationAsync()
         {
             Thread.Sleep(1000); //service accepte only 1 call per sec.
-            var result = await BingService.GetLocationAsync("Rue de la culture 5, Tournai");
+            var result = await Service.GetLocationAsync("Rue de la culture 5, Tournai");
             Assert.IsNotNull(result, "Call service faild");
             //Assert.IsNull(result.Result, "Call service faild");
             Assert.Greater(result.Count, 0, "exepected No results");
@@ -29,7 +29,7 @@ namespace RoadCalculTestService
         public async System.Threading.Tasks.Task GetLocationAsyncFaild()
         {
             Thread.Sleep(1000); //service accepte only 1 call per sec.
-            var result = await BingService.GetLocationAsync("blablabla");
+            var result = await Service.GetLocationAsync("blablabla");
             Assert.IsNotNull(result, "Call service faild");
             //Assert.IsNull(result.Result, "Call service faild");
             Assert.AreEqual(result.Count, 0, "execpted Result count is zero");
@@ -44,7 +44,7 @@ namespace RoadCalculTestService
                 origin = new RoadCalculModel.Parking(),
             };
             Thread.Sleep(1000); //service accepte only 1 call per sec.
-            var result = await BingService.DistanceMatrixAsync(criteria);
+            var result = await Service.DistanceMatrixAsync(criteria);
             Assert.IsNotNull(result, "Call service faild");
             //Assert.IsNull(result.Result, "Call service faild");
             Assert.AreEqual(result.Count, 1, "Result count must equals 1");
@@ -71,7 +71,7 @@ namespace RoadCalculTestService
                 },
             };
             Thread.Sleep(1000); //service accepte only 1 call per sec.
-            var result = await BingService.DistanceMatrixAsync(criteria);
+            var result = await Service.DistanceMatrixAsync(criteria);
             Assert.IsNotNull(result, "Call service faild");
             //Assert.IsNull(result.Result, "Call service faild");
             Assert.AreEqual(result.Count, 1, "Result count must equals 1");

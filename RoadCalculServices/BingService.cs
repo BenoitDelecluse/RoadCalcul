@@ -6,7 +6,7 @@ using RoadCalculServices.Interface;
 
 namespace RoadCalculServices
 {
-    public class BingService : IBingService
+    internal class BingService : IBingService
     {
         static string BingKey = "AqzmFAGLwVbp1qsByMJ4Prh4rXTjqWBjrHtzjuwWP4PUdmrfqv9K8L1fc7WkDTaM";
         public async Task<List<DistanceMatrix>> DistanceMatrixAsync(RoadCalculModel.Route criteira)

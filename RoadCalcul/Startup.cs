@@ -12,18 +12,21 @@ using Microsoft.Extensions.Hosting;
 using ReadCalculRepository;
 using ReadCalculRepository.Interface;
 using RoadCalculServices;
+using RoadCalculServices.Configuration;
 using RoadCalculServices.Interface;
 
 namespace RoadCalcul
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IServiceCollectionForBusiness serviceCollectionForBusiness)
         {
             Configuration = configuration;
+            _serviceCollectionForBusiness = serviceCollectionForBusiness;
         }
 
         public IConfiguration Configuration { get; }
+        private readonly IServiceCollectionForBusiness _serviceCollectionForBusiness;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,13 +37,10 @@ namespace RoadCalcul
             services.AddDbContext<DBModelContext>(options =>
               options.UseSqlServer(connections));
 
-            services.AddScoped<IRouteService, RouteService>();
-            services.AddScoped<IRepoCalculDistanceHistorique, RepoCalculDistanceHistorique>();
-
-            services.AddScoped<ISearchService, SearchService>();
+            services.AddScoped<IRepoCalculDistanceHistorique, RepoCalculDistanceHistorique>();          
             services.AddScoped<IRepoSearchHistorique, RepoSearchHistorique>();
 
-            services.AddScoped<IBingService, BingService>();
+            _serviceCollectionForBusiness.RegisterDependencies(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

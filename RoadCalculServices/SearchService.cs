@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RoadCalculServices
 {
-    public class SearchService : ISearchService
+    internal class SearchService : ISearchService
     {
         private readonly IRepoSearchHistorique RepoSearchHistorique;
 

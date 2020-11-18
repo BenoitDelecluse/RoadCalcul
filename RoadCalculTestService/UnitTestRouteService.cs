@@ -13,29 +13,29 @@ namespace RoadCalculTestService
     [TestFixture]
     public class UnitTestSearchservice
     {
-        private ISearchService SearchService;
+        private IRouteService Service;
         [SetUp]
         public void Setup()
         {
-            Mock<IRepoSearchHistorique> Repo = new Mock<IRepoSearchHistorique>();
-            var returnlist = new List<SearchHistorique>();
-            var item1 = new SearchHistorique
+            Mock<IRepoCalculDistanceHistorique> Repo = new Mock<IRepoCalculDistanceHistorique>();
+            var returnlist = new List<CalculDistanceHistorique>();
+            var item1 = new CalculDistanceHistorique
             { };
             returnlist.Add(item1);
-            var item2 = new SearchHistorique
+            var item2 = new CalculDistanceHistorique
             { };
             returnlist.Add(item2);
             Repo.Setup(r => r.GetAll()).ReturnsAsync(returnlist);
             Repo.Setup(r => r.Get(It.IsAny<int>())).ReturnsAsync(item1);
-            Repo.Setup(r => r.Add(It.IsAny<SearchHistorique>())).ReturnsAsync(true);
-            Repo.Setup(r => r.Update(It.IsAny<SearchHistorique>())).ReturnsAsync(true);
-            SearchService = new SearchService(Repo.Object);
+            Repo.Setup(r => r.Add(It.IsAny<CalculDistanceHistorique>())).ReturnsAsync(true);
+            Repo.Setup(r => r.Update(It.IsAny<CalculDistanceHistorique>())).ReturnsAsync(true);
+            Service = new RouteService(Repo.Object);
         }
 
         [Test]
         public async System.Threading.Tasks.Task GetAll()
         {
-            var result = await SearchService.GetAll();
+            var result = await Service.GetAll();
             Assert.IsNotNull(result, "Call service faild");
             //Assert.IsNull(result.Result, "Call service faild");
             Assert.Greater(result.Count, 0, "exepected No results");
@@ -44,40 +44,59 @@ namespace RoadCalculTestService
         [Test]
         public async System.Threading.Tasks.Task Add()
         {
-            var item1 = new SearchHistorique
+            var item1 = new CalculDistanceHistorique
             {
-                Querry = "value",
-                Time = DateTime.Now,
+                CarConsumption = 1,
+                DestinationLat = 50,
+                DestinationLong = 3,
+                DestinationName = "Test name Dest",
+                DestinationType = "Road",
+                OriginLat = 51,
+                OriginLong = 4,
+                OriginName = "Test name Origin",
+                OriginType = "Adress"
             };
-            var result = await SearchService.Add(item1);
+            var result = await Service.Add(item1);
             Assert.IsNotNull(result, "Call service faild");
             //Assert.IsNull(result.Result, "Call service faild");
             Assert.IsTrue(result, "exepected true");
         }
 
-        public async System.Threading.Tasks.Task Faildquerry()
+        [TestCase(0, 50, 3, 51, 4)]
+        [TestCase(-134, 50, 3, 51, 4)]
+        [TestCase(1, 0, 3, 51, 4)]
+        [TestCase(1, 50, 0, 51, 4)]
+        [TestCase(1, 50, 3, 0, 4)]
+        [TestCase(1, 50, 3, 51, 0)]
+        public async System.Threading.Tasks.Task Faild(double carConsumption, double destinationLat, double destinationLong, double originLat, double originLong)
         {
-            var item1 = new SearchHistorique
+            var item1 = new CalculDistanceHistorique
             {
-                Querry = null,
-                Time = DateTime.Now,
+                CarConsumption = carConsumption,
+                DestinationLat = destinationLat,
+                DestinationLong = destinationLong,
+                DestinationName = "Test name Dest",
+                DestinationType = "Road",
+                OriginLat = originLat,
+                OriginLong = originLong,
+                OriginName = "Test name Origin",
+                OriginType = "Adress"
             };
-            var result = await SearchService.Add(item1);
+            var result = await Service.Add(item1);
             Assert.IsNotNull(result, "Call service faild");
             //Assert.IsNull(result.Result, "Call service faild");
             Assert.IsFalse(result, "exepected false");
         }
 
-        public async System.Threading.Tasks.Task FaildTime()
+        [TestCase(1, 100, 1)]
+        [TestCase(2, 100, 2)]
+        [TestCase(2, 50, 1)]
+        [TestCase(1, 50, 0.5)]
+        public void TestCalculConsumption(double carcosum, double distance, double expectedresult)
         {
-            var item1 = new SearchHistorique
-            {
-                Querry = "value",
-            };
-            var result = await SearchService.Add(item1);
-            Assert.IsNotNull(result, "Call service faild");
-            //Assert.IsNull(result.Result, "Call service faild");
-            Assert.IsFalse(result, "exepected false");
+            var result = Service.GetCosumption(carcosum, distance);
+            Assert.AreEqual(result, expectedresult, "exepected " + expectedresult);
         }
+
     }
 }

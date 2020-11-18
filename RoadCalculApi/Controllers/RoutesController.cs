@@ -12,10 +12,10 @@ namespace RoadCalculApi.Controllers
     [ApiController]
     public class RoutesController : ControllerBase
     {
-        private readonly IRouteService RouteService;
-        public RoutesController(IRouteService routeService)
+        private readonly IBusinessService Service;
+        public RoutesController(IBusinessService service)
         {
-            this.RouteService = routeService;
+            this.Service = service;
         }
 
         [HttpGet]
@@ -23,7 +23,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await this.RouteService.GetAll();
+                var result = await this.Service.GetAll();
                 if (result == null)
                 {
                     return Ok(new { succes = false, description = "" });
@@ -53,7 +53,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await this.RouteService.Add(value);
+                var result = await this.Service.Add(value);
                 if (result == false)
                 {
                     return Ok(new { succes = false, description = "" });
@@ -82,7 +82,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await this.RouteService.Update(value);
+                var result = await this.Service.Update(value);
                 if (result == false)
                 {
                     return Ok(new { succes = false, description = "" });

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RoadCalculServices
 {
-    public class RouteService : IRouteService
+    internal class RouteService : IRouteService
     {
         private readonly IRepoCalculDistanceHistorique RepoCalculDistanceHistorique;
 

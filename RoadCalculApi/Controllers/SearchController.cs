@@ -13,10 +13,10 @@ namespace RoadCalculApi.Controllers
     [ApiController]
     public class SearchController : ControllerBase
     {
-        private readonly ISearchService SearchService;
-        public SearchController(ISearchService searchService)
+        private readonly IBusinessService Service;
+        public SearchController(IBusinessService service)
         {
-            this.SearchService = searchService;
+            this.Service = service;
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await this.SearchService.GetAll();
+                var result = await this.Service.GetAll();
                 if (result == null)
                 {
                     return Ok(new { succes = false, description = "" });
@@ -54,7 +54,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await this.SearchService.Add(value);
+                var result = await this.Service.Add(value);
                 if (result == false)
                 {
                     return Ok(new { succes = false, description = "" });
@@ -83,7 +83,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await this.SearchService.Update(value);
+                var result = await this.Service.Update(value);
                 if (result == false)
                 {
                     return Ok(new { succes = false, description = "" });

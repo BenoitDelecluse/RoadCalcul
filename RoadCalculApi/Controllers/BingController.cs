@@ -13,10 +13,10 @@ namespace RoadCalculApi.Controllers
     [ApiController]
     public class BingController : ControllerBase
     {
-        private readonly IBingService BingService;
-        public BingController(IBingService bingService)
+        private readonly IBusinessService Service;
+        public BingController(IBusinessService service)
         {
-            this.BingService = bingService;
+            this.Service = service;
         }
 
         [HttpGet("/GetCoordonate/{querryAdress}")]
@@ -24,7 +24,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await BingService.GetLocationAsync(querryAdress);
+                var result = await Service.GetLocationAsync(querryAdress);
                 if (result == null)
                 {
                     return Ok(new { succes = false, description = "" });
@@ -54,7 +54,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await BingService.DistanceMatrixAsync(value);
+                var result = await Service.DistanceMatrixAsync(value);
                 if (result == null)
                 {
                     return Ok(new { succes = false, description = "" });

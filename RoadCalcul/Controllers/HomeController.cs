@@ -18,17 +18,11 @@ namespace RoadCalcul.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IBingService BingService;
-        private readonly ISearchService SearchService;
-        private readonly IRouteService RouteService;
+        private readonly IBusinessService Service;
 
-        public HomeController(ILogger<HomeController> logger, IBingService bingService, ISearchService searchService, IRouteService routeService)
+        public HomeController( IBusinessService service)
         {
-            _logger = logger;
-            this.BingService = bingService;
-            this.SearchService = searchService;
-            this.RouteService = routeService;
+            this.Service = service;
         }
 
         public IActionResult Index()
@@ -72,7 +66,7 @@ namespace RoadCalcul.Controllers
                         if (calculmodel != null)
                         {
                             calculmodel.Distances = GetDistances(calculmodel.Departure, calculmodel.Destination, calculmodel.CarConsumption);
-                            calculmodel.DistanceConsumption = RouteService.GetCosumption(calculmodel.Distances[0].Results[0].TravelDistance, model.CarConsumption);
+                            calculmodel.DistanceConsumption = Service.GetCosumption(calculmodel.Distances[0].Results[0].TravelDistance, model.CarConsumption);
                             return View("Calcul", calculmodel);
                         }
                         break;
@@ -122,8 +116,8 @@ namespace RoadCalcul.Controllers
         {
             try
             {
-                var result = BingService.GetLocationAsync(query);
-                SearchService.Add(new RoadCalculModel.DataBase.SearchHistorique
+                var result = Service.GetLocationAsync(query);
+                Service.Add(new RoadCalculModel.DataBase.SearchHistorique
                 {
                     Querry = query,
                     Time = DateTime.Now
@@ -139,7 +133,7 @@ namespace RoadCalcul.Controllers
         public IActionResult Calcul(CalculModel model)
         {
             model.Distances = GetDistances(model.Departure, model.Destination, model.CarConsumption);
-            model.DistanceConsumption = RouteService.GetCosumption(model.Distances[0].Results[0].TravelDistance, model.CarConsumption);
+            model.DistanceConsumption = Service.GetCosumption(model.Distances[0].Results[0].TravelDistance, model.CarConsumption);
             return View("Calcul", model);
         }
 
@@ -158,8 +152,8 @@ namespace RoadCalcul.Controllers
                     Latitude = Departure.Point.Coordinates[0],
                     Longiture = Departure.Point.Coordinates[1]
                 };
-                var result = BingService.DistanceMatrixAsync(criteria);
-                RouteService.Add(new RoadCalculModel.DataBase.CalculDistanceHistorique
+                var result = Service.DistanceMatrixAsync(criteria);
+                Service.Add(new RoadCalculModel.DataBase.CalculDistanceHistorique
                 {
                     DestinationName = Destination.Name,
                     DestinationType = Destination.EntityType,
@@ -184,7 +178,7 @@ namespace RoadCalcul.Controllers
         public IActionResult Report()
         {
             var model = new ReportModel();
-            model.SearchHistoriques = SearchService.GetAll().Result;
+            model.SearchHistoriques = Service.GetAllSearch().Result;
             var SearchHisto = JsonSerializer.Serialize(model.SearchHistoriques);
             TempData["HistoriquesSearch"] = SearchHisto;
             TempData.Keep("HistoriquesSearch");
@@ -194,7 +188,7 @@ namespace RoadCalcul.Controllers
         public IActionResult ReportCalcul()
         {
             var model = new ReportModel();
-            model.CalculDistanceHistoriques = RouteService.GetAll().Result;
+            model.CalculDistanceHistoriques = Service.GetAll().Result;
             var DistanceHisto = JsonSerializer.Serialize(model.CalculDistanceHistoriques);
             TempData["HistoriquesDistance"] = DistanceHisto;
             TempData.Keep("HistoriquesDistance");
@@ -242,7 +236,7 @@ namespace RoadCalcul.Controllers
             };
             modelcalcul.CarConsumption = Distance.CarConsumption;
             modelcalcul.Distances = GetDistances(modelcalcul.Departure, modelcalcul.Destination, Distance.CarConsumption);
-            modelcalcul.DistanceConsumption = RouteService.GetCosumption(modelcalcul.Distances[0].Results[0].TravelDistance, modelcalcul.CarConsumption);
+            modelcalcul.DistanceConsumption = Service.GetCosumption(modelcalcul.Distances[0].Results[0].TravelDistance, modelcalcul.CarConsumption);
             return View("Calcul", modelcalcul);
         }
 
