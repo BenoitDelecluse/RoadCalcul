@@ -1,15 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ReadCalculRepository;
-using ReadCalculRepository.Interface;
-using RoadCalculServices;
 using RoadCalculServices.Configuration;
-using RoadCalculServices.Interface;
-using RoadCalculServiceTest.Services;
 
 namespace RoadCalculApi
 {
@@ -27,17 +21,9 @@ namespace RoadCalculApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen();          
 
-            var connections = Configuration.GetConnectionString("DatabaseConnection");
-
-            services.AddDbContext<DBModelContext>(options =>
-              options.UseSqlServer(connections));
-
-            services.AddScoped<IRepoCalculDistanceHistorique, RepoCalculDistanceHistorique>();
-            services.AddScoped<IRepoSearchHistorique, RepoSearchHistorique>();
-
-            _serviceCollectionForBusiness.RegisterDependencies(services);
+            _serviceCollectionForBusiness.RegisterDependencies(Configuration,services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

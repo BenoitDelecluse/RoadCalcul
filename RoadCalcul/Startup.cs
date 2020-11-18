@@ -32,15 +32,8 @@ namespace RoadCalcul
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            var connections = Configuration.GetConnectionString("DatabaseConnection");
-
-            services.AddDbContext<DBModelContext>(options =>
-              options.UseSqlServer(connections));
-
-            services.AddScoped<IRepoCalculDistanceHistorique, RepoCalculDistanceHistorique>();          
-            services.AddScoped<IRepoSearchHistorique, RepoSearchHistorique>();
-
-            _serviceCollectionForBusiness.RegisterDependencies(services);
+      
+            _serviceCollectionForBusiness.RegisterDependencies(Configuration,services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

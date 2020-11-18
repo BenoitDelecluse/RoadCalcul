@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RoadCalculModel;
-using RoadCalculServices.Interface;
-using RoadCalculServiceTest;
+using RoadCalculServices.Public.Interface;
+using System;
+using System.Threading.Tasks;
 
 namespace RoadCalculApi.Controllers
 {
@@ -24,7 +21,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await Service.GetLocationAsync(querryAdress);
+                var result = await Service.Bing.GetLocationAsync(querryAdress);
                 if (result == null)
                 {
                     return Ok(new { succes = false, description = "" });
@@ -54,7 +51,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await Service.DistanceMatrixAsync(value);
+                var result = await Service.Bing.DistanceMatrixAsync(value);
                 if (result == null)
                 {
                     return Ok(new { succes = false, description = "" });

@@ -1,11 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RoadCalculServices.Configuration
 {
     public interface IServiceCollectionForBusiness
-    {        void RegisterDependencies(IServiceCollection services);
+    {        void RegisterDependencies(IConfiguration configuration, IServiceCollection services);
     }
 }

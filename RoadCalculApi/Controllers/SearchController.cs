@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RoadCalculModel.DataBase;
-using RoadCalculServices.Interface;
+using RoadCalculServices.Public.Interface;
+using System;
+using System.Threading.Tasks;
 
 
 namespace RoadCalculApi.Controllers
@@ -24,7 +22,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await this.Service.GetAll();
+                var result = await this.Service.Search.GetAllSearch();
                 if (result == null)
                 {
                     return Ok(new { succes = false, description = "" });
@@ -54,7 +52,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await this.Service.Add(value);
+                var result = await this.Service.Search.Add(value);
                 if (result == false)
                 {
                     return Ok(new { succes = false, description = "" });
@@ -83,7 +81,7 @@ namespace RoadCalculApi.Controllers
         {
             try
             {
-                var result = await this.Service.Update(value);
+                var result = await this.Service.Search.Update(value);
                 if (result == false)
                 {
                     return Ok(new { succes = false, description = "" });

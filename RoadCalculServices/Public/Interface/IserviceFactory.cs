@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using RoadCalculServices.Interface;
 
-namespace RoadCalculServices.Interface
+namespace RoadCalculServices.Public.Interface
 {
     internal interface IserviceFactory
     {

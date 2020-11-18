@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RoadCalculServices.Interface;
+using RoadCalculServices.Public.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RoadCalculServices
+namespace RoadCalculServices.Public
 {
     internal class ServiceFactory : IserviceFactory
     {
